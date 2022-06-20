@@ -1,0 +1,115 @@
+<mat-dialog-content>
+
+<div class="title">
+  <p>Lets add a new Fragrance.</p>
+</div>
+
+
+<form class="form" name="form" method="post" #addForm="ngForm" novalidate>
+<div class="row">
+  <div class="form-group col-md-4">
+    <label for="">Fragrance Name</label>
+    <input required type="text" name="fragranceName" [(ngModel)]="fragModel.fragranceName" class="form-control" #fragranceName="ngModel" placeholder="fragrance Name">
+    <p class="error" [hidden]="fragranceName.valid || fragranceName.untouched">
+      A fragrance name is required
+    </p>
+  </div>
+  
+  <div class="form-group col-md-4">
+    <label for="">Category</label>
+    <input required type="text" name="category" [(ngModel)]="fragModel.category" class="form-control" #category="ngModel" placeholder="Category">
+    <p class="error" [hidden]="category.valid || category.untouched">
+      Category is required
+    </p>
+  </div>
+  
+  <div class="form-group col-md-4">
+    <label for="">Designer</label>
+    <input required type="text" name="designer" [(ngModel)]="fragModel.designer" class="form-control" #designer="ngModel" placeholder="Designer">
+    <p class="error" [hidden]="designer.valid || designer.untouched">
+      A designer is required
+    </p>
+  </div>
+
+  
+</div>
+
+<div class="row">
+  <div class="form-group col-md-4">
+    <label for="">Wholeseller Price</label>
+    <input required type="text" name="wholeSellerPrice" [(ngModel)]="fragModel.wholeSellerPrice" class="form-control" #wholeSellerPrice="ngModel" placeholder="Wholeseller Price">
+    <p class="error" [hidden]="wholeSellerPrice.valid || wholeSellerPrice.untouched">
+      Wholeseller Price is required
+    </p>
+  </div>
+  <div class="form-group col-md-4">
+    <label for="">End User Price</label>
+    <input required type="text" name="endUserPrice" [(ngModel)]="fragModel.endUserPrice" class="form-control" #endUserPrice="ngModel" placeholder="End User Price">
+    
+    <p class="error" [hidden]="endUserPrice.valid || endUserPrice.untouched">
+      End User Price is required
+    </p>
+  </div>
+  <div class="form-group col-md-4">
+    <label for="">Gender Type</label>
+    <input required type="text" name="genderType" [(ngModel)]="fragModel.genderType" class="form-control" #genderType="ngModel" placeholder="Gender Type">
+    
+    <p class="error" [hidden]="genderType.valid || genderType.untouched">
+      Gender is required
+    </p>
+  </div>
+</div>
+  <div class="row">
+    <div class="form-group col-md-4">
+      <label for="">Medium Size Price</label>
+      <input required type="text" name="mediumSizePrice" [(ngModel)]="fragModel.mediumSizePrice" class="form-control" #mediumSizePrice="ngModel" placeholder="Medium Size Price">
+      
+    <p class="error" [hidden]="mediumSizePrice.valid || mediumSizePrice.untouched">
+      Medium Size Price is required
+    </p>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="">Big Size Price</label>
+      <input required type="text" name="bigSizePrice" [(ngModel)]="fragModel.bigSizePrice" class="form-control" #bigSizePrice="ngModel" placeholder="Big Size Price">
+      
+    <p class="error" [hidden]="bigSizePrice.valid || bigSizePrice.untouched">
+      Big Size Price is required
+    </p>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="">Sample Price</label>
+      <input required type="text" name="samplePrice" [(ngModel)]="fragModel.samplePrice" class="form-control" #samplePrice="ngModel" placeholder="Sample Price">
+      
+    <p class="error" [hidden]="samplePrice.valid || samplePrice.untouched">
+      Sample Price is required
+    </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="">Description</label>
+      <textarea required type="text" name="description" [(ngModel)]="fragModel.description" class="form-control" #description="ngModel" placeholder="Description"></textarea>
+      
+      <p class="error" [hidden]="description.valid || description.untouched">
+          Fragrance description is required
+      </p>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="">Scent Group</label>
+      <textarea required type="text" name="scentGroup" [(ngModel)]="fragModel.scentGroup" class="form-control" #scentGroup="ngModel" placeholder="Scent Group"></textarea>
+      
+    <p class="error" [hidden]="scentGroup.valid || scentGroup.untouched">
+      Scent Group is required
+    </p>
+    </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-12">
+        <button class="right" name="editBtn" mat-button [disabled]="!addForm.form.valid" (click)="addNewFrag(addForm)" color="primary">Add Fragrance</button>
+        <button class="left" name="deleteBtn" mat-raised-button (click)="closeAddDialog()" color="warn">Cancel </button><br>
+      </div>
+    </div>
+</form>
+
+</mat-dialog-content>

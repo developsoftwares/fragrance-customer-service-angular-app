@@ -1,0 +1,78 @@
+
+<app-nav></app-nav>
+
+<div class="container">
+
+    <div *ngIf="showSpinner" style="text-align: center; padding-top: 100px;">
+        <app-preloader></app-preloader>
+    </div>
+
+    <div *ngIf="showUsers" class="card container-fluid" style="padding-top: 100px;">
+      <mat-card>
+      <div class="card-body">
+      <div class="row">
+        <div class="col-md-12 title">
+            <h4 style="text-align: center;">100% Fragrance Mobile App Registered Users</h4>
+            </div>
+    </div>
+  </div>
+</mat-card>
+    </div>
+   
+
+ 
+<div class="container-fluid table-responsive">
+	<div class="row">
+		<div class="col-md-12">
+		    <div class="card">
+		        <div class="card-body">
+		            <div class="row">
+		                <div class="col-md-12">
+                        <table id="example" class="table table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                                <thead class="bg-light">
+                                  <tr>  
+                                    <th>#</th>
+                                    <th>Username</th>
+                                    <th>User ID</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>Address</th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let user of custDetails; let i = index; trackBy: trackByMethod">
+                                    <td><small>{{i+1}}</small></td>
+                                    <td><small>{{user?.username}}</small></td>
+                                    <td><small>{{user?.userId}}</small></td>
+                                    <td><small>{{user?.email}}</small></td>
+                                    <td><small>{{user?.phoneNumber}} </small></td>
+                                    <td>
+                                       
+                                            <li>City: {{user?.address?.city}}</li>
+                                            <li>State:{{user?.address?.state}}</li>
+                                            <li>Street:{{user?.address?.street}}</li>
+                                        
+                                    </td>
+                                    <td>
+                                      <button mat-icon-button (click)="openEditCustomerDialog(user)" color="primary" type="button">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                      </button>
+                                      </td>
+                                      <!-- <td> -->
+                                        <!-- <button mat-icon-button (click)="openDeleteCustomerDialog(user)" color="warn" type="button">
+                                          <span class="glyphicon glyphicon-trash"></span>
+                                        </button> -->
+                                      <!-- </td> -->
+                                  </tr>
+                                  </tbody>
+                              </table>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+    </div>
+</div>
+
+</div>

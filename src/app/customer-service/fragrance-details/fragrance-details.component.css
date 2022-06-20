@@ -1,0 +1,29 @@
+.container{
+    padding-top: 100px;
+    padding-bottom: 20px;
+}
+
+table{
+    box-shadow: 0 10px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+.title{
+    font-size: 16px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(0, 125, 141);
+    font-weight: bolder;
+  }
+
+
+mat-card{
+    background: rgb(245, 245, 253);
+    margin-bottom: 10px;
+}

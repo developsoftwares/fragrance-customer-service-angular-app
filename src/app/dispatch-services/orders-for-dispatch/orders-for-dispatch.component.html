@@ -1,0 +1,359 @@
+<app-dispatch-nav></app-dispatch-nav>
+
+
+<div class="container-fluid">
+
+    <div id="page-wrapper" style="padding-top:100px">
+
+      <div *ngIf="showIfOrder">
+        <mat-card style="margin: 0px 0px 10px 0px; background: #0168a3e8;color: white; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; text-align: center;">
+          <h4>{{information}}</h4>
+        </mat-card>
+        <mat-card>
+          <div class="row" style="text-align:center">
+            <div class="col-sm-6">
+              <mat-form-field class="date-full-width">
+                <input [(ngModel)]="dateFrom" matInput [matDatepicker]="from" placeholder="Search From"
+                  #searchFrom="ngModel" required>
+                <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #from></mat-datepicker>
+                <mat-error *ngIf="searchFrom.errors && searchFrom.errors.required">Please choose date to search from
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-6">
+              <mat-form-field class="date-full-width">
+                <input [(ngModel)]="dateTo" matInput [matDatepicker]="to" placeholder="Search To" #searchTo="ngModel"
+                  required>
+                <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #to></mat-datepicker>
+                <mat-error *ngIf="searchTo.errors && searchTo.errors.required">Please choose date to search to
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row" style="text-align:center">
+            <div class="col-sm-6">
+              <br>
+              <button (click)="searchDates(dateFrom,dateTo)" [disabled]="searchFrom.errors || searchTo.errors"
+              color="accent" mat-raised-button>
+              <mat-icon>search</mat-icon> Search Previous Orders
+            </button>
+            </div>
+          
+            <div class="col-sm-6">
+              <br>
+              <button *ngIf="showAllOrdersBtn" (click)="getOrdersToday()" color="accent"
+            mat-raised-button>
+            <mat-icon>calendar_today</mat-icon> Today's Orders
+          </button>
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-accordion *ngFor="let order of orders let i=index; trackBy: trackByMethod" style="margin:5px">
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+            style="background:rgb(187, 213, 247)">
+            <mat-expansion-panel-header>
+              <mat-panel-title style="color: rgb(0, 0, 70); font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+                <strong>{{i+1 }}.&nbsp;&nbsp; {{ order.username}} </strong>
+              </mat-panel-title>
+              <mat-panel-description style="color: rgb(0, 0, 70); font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+                <strong>{{checkOrderStatus(order)}} </strong>               
+              </mat-panel-description>
+              <mat-panel-description style="color: rgb(0, 0, 70); font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+                <strong>{{checkPaymentStatus(order)}}</strong>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-card style="background:rgb(153, 216, 235);">
+              <mat-card style="margin-bottom: 10px; background: rgb(228, 223, 223); color: rgb(0, 0, 70);
+              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 15px;">
+               <div class="table-responsive">
+                 <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      
+                      <th scope="col">Customer's Username</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Phone Number</th>
+                      <th scope="col">Shipping Address</th>
+                      <th scope="col">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{{order.username}}</td>
+                      <td>{{order.email}}</td>
+                      <td>{{order.phoneNumber}}</td>
+                      <td>{{order.address}}</td>
+                      <td>{{order.dateOfOrder | date: 'fullDate'}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+               </div>
+              </mat-card>
+
+              <div class="orders">
+                
+                <mat-card>
+
+                  <div class="row table-responsive">
+                    <div class="col-sm-12 col-md-10 col-md-offset-1">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="table-head">Fragrance Name</th>
+                                    <th class="table-head">Quantity</th>
+                                    <th class="table-head">Size</th>
+                                    <th class="table-head">Price</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th class="table-head">Subtotal</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let frag of order.fragrances">
+                                    <td class="col-sm-8 col-md-6">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <h3 class="media-heading"><strong>{{frag.fragranceName}}</strong></h3>
+                                        </div>
+                                    </div></td>
+                                    <td class="col-sm-1 col-md-1" style="text-align: center">
+                                    <input type="text" class="form-control" disabled value="{{frag.quantity}}">
+                                    </td>
+                                    <td class="col-sm-1 col-md-1 text-center"><strong>{{frag.bottleSize}}</strong></td>
+                                    <td class="col-sm-1 col-md-1 text-center"><strong>{{frag.price}}</strong></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="col-sm-1 col-md-1"><strong>{{ calcOrderSubTotal(frag) }}</strong></td>
+                                    <!-- <td>
+                                    <button mat-icon-button [disabled]="order.attendedTo" (click)="openEditOrderDialog(frag, order)" color="primary" type="button">
+                                      <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                    </td> -->
+                                    <td>
+                                      <button mat-button [disabled]="!order.attendedTo || order.attendedTo == 'returned' || order.attendedTo == 'delivered' || order.fragrances.length == '1'" (click)="openDeleteOrderDialog(frag, order)" color="warn" type="button">
+                                        Return
+                                      </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                              <tr>
+                                <td><h5> Total Fragrances:</h5></td>
+                                <td><h5>{{totalQuantity(order.fragrances)}}</h5></td>
+                                <td><h5>Total Amount:</h5></td>
+                                <td><h5>{{calcOrderTotal(order)}}</h5></td>
+                                <td>
+                                <button *ngIf="(order.attendedTo !== 'returned') && order.attendedTo" [disabled]="order.attendedTo == 'delivered'" (click)="attendTo(order)" type="button" class="btn btn-warning">
+                                  <span class="glyphicon glyphicon-thumbs-up"> </span> {{showDeliverBtn(order)}}
+                              </button></td>
+                              <td>
+                              <button type="button" (click)="printMode(order.fragrances, order)" class="btn btn-success">
+                                  Print <span class="glyphicon glyphicon-print"></span>
+                              </button>
+                            </td>
+                              <td>
+                                <button *ngIf="order.attendedTo !== 'delivered' && order.attendedTo" [disabled]="order.attendedTo == 'returned'" (click)="returnAllOrder(order)" type="button" class="btn btn-danger">
+                                  <span class="glyphicon glyphicon-retweet"></span> {{showReturnBtn(order)}}
+                              </button>
+                              </td>
+                              <td></td>
+                              <td></td>
+                              </tr>
+                            </tfoot>
+                        </table>
+
+                        <div *ngIf="isEmpty(order.deletedOrders)">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th colspan="8" style="text-align: center;font-size: 16px;font-family: cursive; color: teal; background-color: rgb(252, 239, 252);">
+                                    Returned Orders 
+                                </th>
+                              </tr>
+                            </thead>
+  
+                            <tbody>
+                              <tr *ngFor="let frag of order.deletedOrders">
+                                  <td class="col-sm-8 col-md-6">
+                                  <div class="media">
+                                      <div class="media-body">
+                                          <h3 class="media-heading"><strong>{{frag.fragranceName}}</strong></h3>
+                                      </div>
+                                  </div></td>
+                                  <td class="col-sm-1 col-md-1" style="text-align: center">
+                                  <input type="text" class="form-control" disabled value="{{frag.quantity}}">
+                                  </td>
+                                  <td class="col-sm-1 col-md-1 text-center"><strong>{{frag.bottleSize}}</strong></td>
+                                  <td class="col-sm-1 col-md-1 text-center"><strong>{{frag.price}}</strong></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td class="col-sm-1 col-md-1"><strong>{{ calcOrderSubTotal(frag) }}</strong></td>
+                                  <!-- <td>
+                                  <button mat-icon-button [disabled]="order.attendedTo" (click)="openEditOrderDialog(frag, order)" color="primary" type="button">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                  </button>
+                                  </td> -->
+                                  <!-- <td>
+                                    <button mat-icon-button [disabled]="order.attendedTos" (click)="openDeleteOrderDialog(frag, order)" color="warn" type="button">
+                                      <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                  </td> -->
+                              </tr>
+                          </tbody>
+                          </table>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                </mat-card>
+                <hr>
+
+              </div>
+            </mat-card>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+
+      <div *ngIf="showSpinner" style="text-align: center;">
+          <app-preloader></app-preloader>
+      </div>
+
+
+      <div *ngIf="showNoSearchResult" class="well" style="margin-top:160px; text-align: center;">
+          <mat-card>
+            <p style="color: red; font-weight: bold;">Oops !! There are no orders at searched dates</p>
+            <button mat-raised-button (click)="getOrdersToday()" color="accent">
+              Back to today's Orders
+            </button>
+          </mat-card>
+        </div>
+
+        <div *ngIf="showNoTodayResult" class="well" style="margin-top:160px; text-align: center;">
+          <mat-card>
+            <div class="row" style="text-align:center">
+              <div class="col-sm-6">
+                <mat-form-field class="date-full-width">
+                  <input [(ngModel)]="dateFrom" matInput [matDatepicker]="from" placeholder="Search From"
+                    #searchFrom="ngModel" required>
+                  <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #from></mat-datepicker>
+                  <mat-error *ngIf="searchFrom.errors && searchFrom.errors.required">Please choose date to search from
+                  </mat-error>
+                </mat-form-field>
+              </div>
+  
+              <div class="col-sm-6">
+                <mat-form-field class="date-full-width">
+                  <input [(ngModel)]="dateTo" matInput [matDatepicker]="to" placeholder="Search To" #searchTo="ngModel"
+                    required>
+                  <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #to></mat-datepicker>
+                  <mat-error *ngIf="searchTo.errors && searchTo.errors.required">Please choose date to search to
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+  
+            <button (click)="searchDates(dateFrom,dateTo)" [disabled]="searchFrom.errors || searchTo.errors"
+              color="accent" mat-raised-button>
+              <mat-icon>search</mat-icon> Search Previous Orders
+            </button>
+          </mat-card>
+          
+          <mat-card>
+            <p style="color: red; font-weight: bold;">Oops !! There are no orders yet Today</p>
+          </mat-card>
+        </div>
+
+        <div *ngIf="print" class="well" style="text-align: center;">
+
+          <div class="" *ngFor="let order of printArr">
+
+          <mat-card style="margin-bottom: 10px; background: rgb(228, 223, 223); color: rgb(0, 0, 70);
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 16px;">
+           <div class="table-responsive">
+             <h5>
+               {{order.username}}'s Requested Orders.
+             </h5>
+             <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <td><strong> {{order.username}}</strong> </td>
+                  <td><strong> {{order.email}}</strong></td>
+                  <td><strong> {{order.phoneNumber}}</strong></td>
+                  <td><strong>{{order.address}}</strong> </td>
+                  <td><strong>{{order.dateOfOrder | date: 'fullDate'}}</strong></td>
+                </tr>
+              </tbody>
+            </table>
+           </div>
+          </mat-card>
+
+          <mat-card>
+            <div class="row table-responsive">
+              <div class="col-sm-12 col-md-6 col-md-offset-3">
+                  <table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th class="table-head col-md-offset-3">Fragrance Name</th>
+                              <th class="table-head">Quantity</th>
+                              <th class="table-head">Size</th>
+                              <th class="table-head">Price</th>
+                              <th class="table-head">Subtotal</th>
+                              <th></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let frag of order.fragrances">
+                              <td>
+                              <div class="media">
+                                  <div class="media-body">
+                                      <h3 class="media-heading"><strong>{{frag.fragranceName}}</strong></h3>
+                                  </div>
+                              </div></td>
+                              <td class="col-sm-1 col-md-1" style="text-align: center">
+                              <input type="text" class="form-control" disabled value="{{frag.quantity}}">
+                              </td>
+                              <td class="col-sm-1 col-md-1"><strong>{{frag.bottleSize}}</strong></td>
+                              <td class="col-sm-1 col-md-1"><strong>{{frag.price}}</strong></td>
+                              <td class="col-sm-1 col-md-1"><strong>{{ calcOrderSubTotal(frag) }}</strong></td>
+                              <td></td>
+                          </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td><h5> Total Fragrances:</h5></td>
+                          <td><h5>{{multiplyTotalQuan()}}</h5></td>
+                          <td><h5>Total Amount:</h5></td>
+                          <td><h5>{{multiplyTotalAmount()}}</h5></td>
+                          <td>
+                            <button id="printBtn" type="button" (click)="printOrder()" class="btn btn-success printBtn">
+                             Print  <span class="glyphicon glyphicon-print"></span>
+                            </button></td>
+                          <td> <button id="cancelPrintBtn" type="button" (click)="cancelPrinting()" class="btn btn-warning printBtn">
+                            Cancel  <span class="glyphicon glyphicon-cancel"></span>
+                           </button></td>
+                        </tr>
+                      </tfoot>
+                  </table>
+              </div>
+          </div>
+          </mat-card>
+        </div>
+        </div>
+
+    </div>
+  </div>

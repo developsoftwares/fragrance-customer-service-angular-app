@@ -1,0 +1,38 @@
+
+
+.form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+
+  mat-card{
+      background-color: rgb(238, 246, 253);
+  }
+
+p{
+    font-size: 14px;
+    color: red;
+}
+
+.right{
+    float: right;
+    font-family: cursive;
+}
+
+.left{
+    float: left;
+    font-family: cursive;
+}
+
+.title{
+    margin-bottom: 50px;
+    font-family: cursive;
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center;
+}

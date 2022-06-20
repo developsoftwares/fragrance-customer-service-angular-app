@@ -1,0 +1,75 @@
+<div class="title">
+  <p>You are adding a new fragrance to this order..</p>
+  <hr>
+</div>
+
+
+ 
+<form [formGroup]="addOrderForm" method="post">
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input type="text"
+               id="fragranceName"
+               placeholder="Fragrance Name"
+               matInput
+               required
+               (ngModelChange)="valueChange(fragModel.bottleSize, $event)"
+               [formControl]="fragranceName"
+               formControlName="fragranceName"
+               [(ngModel)]="fragModel.fragranceName"
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (onSelectionChange)="setPrice(fragModel.bottleSize, option)">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="addOrderForm.controls['fragranceName'].hasError('required')">Please enter fragrance Name.</mat-error>
+        <mat-error *ngIf="!addOrderForm.valid || addOrderForm.get('fragranceName')invalid">Please enter fragrance Name.</mat-error>
+        </mat-form-field>
+        <p class="error" [hidden]="fragranceName.valid || fragranceName.untouched">
+       Please enter fragrance name. (Select from dropdown)
+        </p>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field>
+        <input required type="number" formControlName="quantity" [(ngModel)]="fragModel.quantity" matInput placeholder="Quantity">
+        <mat-error *ngIf="addOrderForm.get('quantity').invalid">Please enter quantity.</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <mat-label>Fragrance Size</mat-label>
+          <mat-select required value="fragModel.bottleSize" [(ngModel)]="fragModel.bottleSize" formControlName="bottleSize"
+          (selectionChange)="setPrice(fragModel.bottleSize, fragModel.fragranceName)">
+            <mat-option value="Sample Size">Sample Size</mat-option>
+            <mat-option value="Medium Size">Medium Size</mat-option>
+            <mat-option value="Big Size">Big Size</mat-option>
+            <mat-option value="Combo Size">Combo Size</mat-option>
+            <mat-option value="I LOVE IT Size">I LOVE IT Size</mat-option>
+          </mat-select>
+          <mat-error *ngIf="addOrderForm.get('bottleSize').invalid">Please enter bottle size.</mat-error>
+           </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input required matInput formControlName="price" [(ngModel)]="price" type="number" placeholder="price">
+          <mat-error *ngIf="addOrderForm.get('price').invalid">Please enter price.</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <hr>
+
+    <button class="right" name="editBtn" mat-button [disabled]="!addOrderForm.valid" (click)="add(addOrderForm)" color="primary">Save</button>
+    <button class="left" name="deleteBtn" mat-raised-button (click)="closeAddDialog()" color="warn">Cancel </button><br>
+</form>
+
+
+
+
+
+
+

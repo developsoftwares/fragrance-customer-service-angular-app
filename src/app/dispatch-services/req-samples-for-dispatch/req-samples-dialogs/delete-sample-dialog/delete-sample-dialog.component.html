@@ -1,0 +1,22 @@
+
+<div class="title" *ngIf="selectedSample.fragrances.length !== 1">
+  <h4>Warning!!.. you are permanently deleting {{fragName}} from requested samples.</h4>
+  <h3>Please, make sure your customer is buying, before editing these samples, else
+    you won't be able to return them after editing them.
+  </h3>
+  <hr>
+  <section>
+    <mat-checkbox class="" [(ngModel)]="disabled"><h4>I Confirm.</h4></mat-checkbox>
+  </section>
+  <hr>
+ <button class="right" mat-button color="primary" [disabled]="!disabled" (click)="deleteSampleFrag()">OK</button>
+ <button class="left" mat-raised-button color="warn" (click)="closeDeleteDialog()">Cancel</button>
+</div>
+
+<div class="title" *ngIf="selectedSample.fragrances.length == 1">
+  <h4>Sorry!!.. you can not DELETE or RETURN {{fragName}} from requested samples after editing them.</h4>
+  <hr>
+  <h3>You are expected to sell this sample after editing them.</h3>
+  <hr>
+  <button class="right" mat-button color="primary" (click)="closeDeleteDialog()">Ok</button>
+</div>

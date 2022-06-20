@@ -1,0 +1,72 @@
+<div class="title">
+  <p>Warning !!.. you are making changes to {{user}}</p>
+  <hr>
+</div>
+
+
+<form [formGroup]="editCustDetailsForm" method="post">
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input type="text"
+               id="username"
+               formControlName="username"
+               placeholder="Username"
+               matInput
+               required
+               [(ngModel)]="selectedCustomer.username">
+               <mat-error *ngIf="editCustDetailsForm.get('username').invalid">Please enter Customer's Username.</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field>
+        <input required type="text" matInput [(ngModel)]="selectedCustomer.email" formControlName="email" placeholder="Email">
+        <mat-error *ngIf="editCustDetailsForm.get('email').invalid">Please enter Customer's Email.</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input required type="text" matInput [(ngModel)]="selectedCustomer.userId" formControlName="userId" placeholder="User Id">
+          <mat-error *ngIf="editCustDetailsForm.get('userId').invalid">Please enter Customer's User Id.</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="selectedCustomer.phoneNumber" formControlName="phoneNumber" placeholder="Phone Number">
+          <!-- <mat-error *ngIf="editCustDetailsForm.get('phoneNumber').invalid">Please enter Customer's Phone Number.</mat-error> -->
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6" *ngIf="selectedCustomer.address">
+        <mat-form-field>
+          <input type="text" matInput [(ngModel)]="selectedCustomer.address.state" formControlName="state" placeholder="State">
+          <!-- <mat-error *ngIf="editCustDetailsForm.get('state').invalid">Please enter Customer's State of residence.</mat-error> -->
+        </mat-form-field>
+      </div>
+      <div class="col-md-6" *ngIf="selectedCustomer.address">
+        <mat-form-field>
+          <input type="text" matInput [(ngModel)]="selectedCustomer.address.city" formControlName="city" placeholder="City">
+          <!-- <mat-error *ngIf="editCustDetailsForm.get('city').invalid">Please enter Customer's City.</mat-error> -->
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12" *ngIf="selectedCustomer.address">
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="selectedCustomer.address.street" formControlName="street" placeholder="Street">
+          <!-- <mat-error *ngIf="editCustDetailsForm.get('street').invalid">Please enter Customer's Street.</mat-error> -->
+        </mat-form-field>
+      </div>
+    </div>
+    
+    <hr>
+
+    <button class="right" name="editBtn" mat-button [disabled]="!editCustDetailsForm.valid" (click)="update()" color="primary">Update User</button>
+    <button class="left" name="deleteBtn" mat-raised-button (click)="closeEditDialog()" color="warn">Cancel</button><br>
+</form>
+
+

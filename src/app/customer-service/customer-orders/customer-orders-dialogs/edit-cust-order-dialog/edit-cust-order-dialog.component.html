@@ -1,0 +1,54 @@
+<div class="title">
+  <p>Warning !!.. you are making changes to this order</p>
+  <hr>
+</div>
+
+
+<form [formGroup]="editOrderForm" method="post">
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input type="text"
+               id="fragranceName"
+               formControlName="fragranceName"
+               placeholder="Fragrance Name"
+               matInput
+               required
+               [(ngModel)]="selectedFrag.fragranceName">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field>
+        <input required type="number" matInput [(ngModel)]="selectedFrag.quantity" formControlName="quantity" placeholder="Quantity">
+        <mat-error *ngIf="editOrderForm.get('quantity').invalid">Please enter order quantity.</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+       <mat-select required value="selectedFrag.bottleSize" [(ngModel)]="selectedFrag.bottleSize" formControlName="bottleSize">
+         <mat-option value="Sample Size">Sample Size</mat-option>
+         <mat-option value="Medium Size">Medium Size</mat-option>
+         <mat-option value="Big Size">Big Size</mat-option>
+         <mat-option value="Combo Size">Combo Size</mat-option>
+         <mat-option value="I LOVE IT Size">I LOVE IT Size</mat-option>
+       </mat-select>
+       <mat-error *ngIf="editOrderForm.get('bottleSize').invalid">Please enter bottle size.</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input required matInput type="number" [(ngModel)]="selectedFrag.price" formControlName="price" placeholder="price">
+          <mat-error *ngIf="editOrderForm.get('price').invalid">Please enter price.</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <hr>
+
+    <button class="right" name="editBtn" mat-button [disabled]="!editOrderForm.valid" (click)="update()" color="primary">Update Fragrance</button>
+    <button class="left" name="deleteBtn" mat-raised-button (click)="closeEditDialog()" color="warn">Cancel</button><br>
+</form>
+
+

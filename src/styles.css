@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.cdk-overlay-container { z-index: 9999; }
+.popover { max-width: 100% !important; 
+    margin: auto;
+    position:absolute;
+    overflow-x: visible;
+    overflow-y:scroll;
+}

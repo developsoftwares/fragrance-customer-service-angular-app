@@ -1,0 +1,75 @@
+<app-nav></app-nav>
+
+
+<div class="container">
+
+
+  <div style="text-align: center;">
+    <app-preloader></app-preloader>
+  </div>
+
+
+<div class="table-responsive body">
+
+
+  <div class="card container-fluid">
+    <mat-card>
+    <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+          <h4 class="title">100% Fragrance Mobile App Fragrances</h4>
+          </div>
+          <div class="col-md-6">
+            <button class="right" name="editBtn" mat-stroked-button (click)="openAddDialog()" color="primary">Add a new Fragrance</button>
+          </div>
+  </div>
+</div>
+</mat-card>
+</div>
+
+    
+    
+
+  <table id="example" style="text-align: center;" class="table table-striped table-bordered table-dark" width="100%" 
+  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead style="background-color: rgb(13, 13, 158); color: white; font-size: 13px; font-family: Verdana, Geneva, Tahoma, sans-serif;">
+        <tr>
+            <th>No</th>
+            <th>Fragrance Name</th>
+            <th>Description</th>
+            <th>Designer</th>
+            <th>Category</th>
+            <th>Whole Seller Price</th>
+            <th>End User Price</th>
+            <th>Big Size Price</th>
+            <th>Medium Size Price</th>
+            <th>Sample Price</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let frag of myFrags; let i = index; trackBy: trackByMethod">
+            <td>{{i+1}}</td>
+            <td>{{frag.fragranceName}}</td>
+            <td>{{frag.description}}</td>
+            <td>{{frag.designer}}</td>
+            <td>{{frag.category}}</td>
+            <td>{{frag.wholeSellerPrice}}</td>
+            <td>{{frag.endUserPrice}}</td>
+            <td>{{frag.bigSizePrice}}</td>
+            <td>{{frag.mediumSizePrice}}</td>
+            <td>{{frag.samplePrice}}</td>
+            <td><button class="btn btn-warning btn-sm" (click)="openEditDialog(frag)"><span class="fa fa-pencil-square" aria-hidden="true"></span></button></td>
+            <td><button class="btn btn-danger btn-sm" (click)="openDeleteDialog(frag)"><span class="fa fa-trash" aria-hidden="true"></span></button></td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+
+</div>  
+
+</div>

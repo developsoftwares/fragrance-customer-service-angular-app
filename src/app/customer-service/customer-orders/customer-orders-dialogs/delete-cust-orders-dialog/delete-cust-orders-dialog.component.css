@@ -1,0 +1,22 @@
+.right{
+    float: right;
+    font-family: cursive;
+  }
+  
+  .left{
+    float: left;
+    font-family: cursive;
+  }
+  
+  .title{
+    color: red;
+    font-family: cursive;
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center;
+  }
+  
+  h4{
+    font-size: 14px;
+    font-weight: bolder;
+  }

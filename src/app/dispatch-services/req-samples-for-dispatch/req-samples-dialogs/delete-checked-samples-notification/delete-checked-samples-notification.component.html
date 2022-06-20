@@ -1,0 +1,13 @@
+<div class="title">
+  <h4>Warning!!.. you are permanently editing samples from requested samples.</h4>
+  <h3>Please, make sure your customer is buying, before editing these samples, else
+    you won't be able to return them after editing them.
+  </h3>
+  <hr>
+  <section>
+    <mat-checkbox class="" [(ngModel)]="disabled"><h4>I Confirm.</h4></mat-checkbox>
+  </section>
+  <hr>
+ <button class="right" mat-button color="primary" [disabled]="!disabled" (click)="deleteMarkedSamples()">OK</button>
+ <button class="left" mat-raised-button color="warn" (click)="closeDeleteDialog()">Cancel</button>
+</div>

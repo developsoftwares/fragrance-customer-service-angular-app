@@ -1,0 +1,87 @@
+.navbar{
+    background-color: rgb(238, 245, 255);
+    color: #000000e8;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
+    transition: 0.3s;
+    box-shadow: 0 10px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+
+}
+ ul li a:hover, ul li a.active {
+    background-color: rgb(0, 0, 56);
+    color: white;
+}
+
+
+.navbar #myNavbar.navbar-collapse {
+    background: rgba(93, 138, 206, 0);
+    color: white;
+}
+
+ul li a {
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 14px;
+}
+
+.navbar-brand{
+   color:rgb(2, 0, 97);
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   font-weight: bold;
+   font-size: 17px;
+}
+
+/* Make more adjustments for phone */
+@media screen and (max-width: 400px) { 
+.navbar-brand{
+    font-size: 14px;
+ }
+
+  }
+
+
+  @media screen and (max-width: 370px) { 
+    .navbar-brand{
+        font-size: 12px;
+     }
+    
+      }
+
+      
+  @media screen and (max-width: 330px) { 
+    .navbar-brand{
+        font-size: 10px;
+     }
+    
+      }
+  
+
+.scrolled #myNavbar.navbar-collapse {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+}
+
+.scrolled{
+    background-color: rgba(0, 0, 0, 0.9);
+    transition: 0.3s;
+    height: 50px;
+    padding: 0px;
+  }
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+a.navbar-brand {
+    margin-right: 100px;
+    color: black;
+}
+
+.toggleMenuStyle {
+    display: block;
+}
